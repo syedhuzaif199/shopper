@@ -1,0 +1,1 @@
+<div class="w-full h-0 border-b border-black/50 dark:border-white/20 my-10"></div>
