@@ -8,6 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script rel="preload" src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll(".aspect-ratio-img");
+            images.forEach((img) => {
+                if (img.naturalHeight >= img.naturalWidth) {
+                    img.classList.add("h-full");
+                } else {
+                    img.classList.add("w-full");
+                }
+            })
+
+        })
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -35,6 +49,7 @@
                 @auth
                 <form action="/logout" method="POST">
                     @csrf
+                    @method('DELETE')
                     <button type="submit" class="px-3 py-2 dark:hover:bg-white/10 hover:bg-gray-200 rounded-xl">Log out</button>
                 </form>
                 @endauth
@@ -46,7 +61,7 @@
         </main>
     </div>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script>
         lucide.createIcons();
     </script>

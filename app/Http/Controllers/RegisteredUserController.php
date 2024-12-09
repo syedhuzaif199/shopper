@@ -21,8 +21,9 @@ class RegisteredUserController extends Controller
             'username' => ['required', 'unique:users,username', 'max:255'],
             'password' => ['required', 'confirmed', Password::min(8)]
         ]);
-
+        $userAttributes["role"] = "customer";
         $user = User::create($userAttributes);
+
 
         Auth::login($user);
 

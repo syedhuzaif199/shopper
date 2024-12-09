@@ -16,8 +16,23 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $categories = [
+            "Electronics",
+            "Clothing",
+            "Books",
+            "Toys",
+            "Furniture",
+            "Food",
+            "Tools",
+            "Sporting Goods",
+            "Automotive",
+            "Jewelry",
+        ];
+
         return [
-            //
+            "name" => $this->faker->unique()->randomElement($categories),
+            "lft" => $this->faker->randomNumber(2),
+            "rgt" => $this->faker->randomNumber(2),
         ];
     }
 }
