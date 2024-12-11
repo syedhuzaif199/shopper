@@ -23,12 +23,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $idx = random_int(0, 9);
-
         return [
             'username' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'role' => ['owner', 'employee', 'customer'][$idx < 1 ? 0 : ($idx < 3 ? 1 : 2)],
+            'role' => ['employee', 'customer'][random_int(0, 9) % 2],
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

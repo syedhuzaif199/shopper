@@ -3,15 +3,15 @@
         <h1 class="text-4xl">Your Cart</h1>
         @if(! $cart->isEmpty())
         <div>
-            <x-vertical-bar />
+            <x-divider />
         </div>
         @foreach($cart as $item)
-        <x-cart-card product_id="{{ $item->product->id }}" quantity="{{ $item->quantity }}" img="{{ asset('storage' . $item->product->img)}}" title="{{ $item->product->name}}" price="${{ $item->product->price }}" />
+        <x-cart-card product_id="{{ $item->product->id }}" quantity="{{ $item->quantity }}" img="{{ asset('storage' . $item->product->image)}}" title="{{ $item->product->name}}" price="${{ $item->product->price }}" />
         @endforeach
 
 
         <div>
-            <x-vertical-bar />
+            <x-divider />
         </div>
 
         <!-- array length in php -->

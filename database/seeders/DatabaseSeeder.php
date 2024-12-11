@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
-use Database\Factories\ProductFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = Category::factory(10)->create();
+        $categories = Category::factory(7)->create();
+        User::create([
+            'username' => 'admin',
+            'email' => 'admin@shopper.com',
+            'password' => 'password',
+            'role' => 'admin',
+        ]);
         User::factory(100)->create();
-        Product::factory(10)->create();
     }
 }

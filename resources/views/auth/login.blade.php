@@ -21,10 +21,7 @@
                         </div>
                     </div>
                     <x-form-input name="password" type="password" autocomplete="current-password" required />
-                    <!-- <div class="mt-2">
-                        <input type="password" name="password" id="password" value="{{ old('password') }}" autocomplete="current-password" required class="block w-full rounded-md bg-white/10 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-white/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                        <x-form-error field="password" />
-                    </div> -->
+
                 </div>
 
                 <div>

@@ -2,12 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+/* disable increment/decrement chevrons for input of type 'number' */
+input[type="number"]::-webkit-outer-spin-button,                 /**/
+input[type="number"]::-webkit-inner-spin-button {                /**/
+    -webkit-appearance: none;                                    /**/
+    margin: 0;                                                   /**/
+}                                                                /**/
+                                                                 /**/
+input[type="number"] {                                           /**/
+    -moz-appearance: textfield;                                  /**/
+}                                                                /**/
+                                                                 /**/
+/* ----------------------------------------------------------------*/
+
+
+.admin-view-table {
+    @apply w-full;
+}
+.admin-view-table tr {
+    @apply h-24;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield;
+.admin-view-table td,
+.admin-view-table th {
+    @apply border-l border-black/50 dark:border-white/50 text-center;
+}
+
+.admin-view-table {
+    @apply border border-black/50 dark:border-white/50;
+}
+
+.admin-view-table tr {
+    @apply border border-black/50 dark:border-white/50;
+}
+
+.admin-view-table tr td:first-child, th:first-child {
+    @apply pl-4;
 }

@@ -14,12 +14,17 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'img',
+        'image',
         'category_id',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
     }
 }

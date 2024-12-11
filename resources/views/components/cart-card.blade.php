@@ -32,7 +32,7 @@
                 @csrf
                 @method('PATCH')
                 <button type="button" onclick="decrementQuantity(this)" class="p-4 block rounded-l-md bg-white/10 px-3 py-1.5 text-base text-gray-900 dark:text-white/80 outline outline-1 -outline-offset-1 dark:outline-white/20 placeholder:text-gray-400 sm:text-sm/6">-</button>
-                <x-form-input type="number" name="quantity" value="{{ $quantity }}" class="rounded-none" />
+                <x-form-input type="number" name="quantity" value="{{ $quantity }}" readonly class="rounded-none" />
                 <button type="button" onclick="incrementQuantity(this)" class="p-4 block rounded-r-md bg-white/10 px-3 py-1.5 text-base text-gray-900 dark:text-white/80 outline outline-1 -outline-offset-1 dark:outline-white/20 placeholder:text-gray-400 sm:text-sm/6">+</button>
             </form>
             <div class="ml-8">

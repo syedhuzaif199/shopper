@@ -30,25 +30,21 @@
         <nav class="w-full h-[80px] border-b border-black/50 dark:border-white/10 mb-10 flex items-center justify-between">
             <div class="w-[33%]">
                 <div class="flex w-fit">
-                    <a href="/" class="flex items-center">
+                    <a href="{{ route('admin.index') }}" class="flex items-center">
                         <i data-lucide="barcode"></i>
                         <h2 class="text-2xl ml-2">shopper</h2>
                     </a>
                 </div>
             </div>
-            <div class="flex w-[33%]">
-                <input class="px-3 py-2 rounded-l-xl w-full bg-white/10 border border-black/50 dark:border-white/20 outline outline-0 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600" type="text" placeholder="Search for products">
-                <button class="px-3 py-2 rounded-r-xl bg-white/10 border border-l-0 border-black/50 dark:border-white/20 hover:bg-gray-200 dark:hover:bg-white/20"><i data-lucide="search"></i></button>
+            <div class="w-[33%] flex justify-between">
+                <x-nav-link href="{{ route('admin.orders.index') }}">Orders</x-nav-link>
+                <x-nav-link href="{{ route('admin.products.index') }}">Products</x-nav-link>
+                <x-nav-link href="{{ route('admin.categories.index') }}">Categories</x-nav-link>
+                <x-nav-link href="{{ route('admin.users.index') }}">Users</x-nav-link>
             </div>
             <div class="w-[33%] flex justify-end items-center space-x-4">
                 <!-- add user account options -->
-                <x-nav-link href="/cart">
-                    <i data-lucide="shopping-cart"></i>
-                </x-nav-link>
-                @guest
-                <x-nav-link href="/login">Log In</x-nav-link>
-                <x-nav-link href="/register">Sign Up</x-nav-link>
-                @endguest
+
                 @auth
                 <form action="/logout" method="POST">
                     @csrf
