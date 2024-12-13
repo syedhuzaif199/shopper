@@ -34,19 +34,4 @@ class CategoryFactory extends Factory
             "name" => $this->faker->word,
         ];
     }
-
-    public function configure()
-    {
-        return $this->afterCreating(function (Category $category) {
-            \App\Models\Product::factory(random_int(1, 5))->create([
-                "category_id" => $category->id,
-            ]);
-            // Optionally, create child categories
-            if (rand(0, 1)) {
-                Category::factory()->count(rand(1, 3))->create()->each(function ($child) use ($category) {
-                    $child->appendToNode($category)->save();
-                });
-            }
-        });
-    }
 }

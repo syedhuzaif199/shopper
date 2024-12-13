@@ -35,9 +35,9 @@
                             {{ $product->id }}
                         </td>
                         <td class="flex justify-center">
-                            <!-- <div class="w-[160px] h-[160px] flex justify-center bg-white m-1 border border-black/50 dark:border-white/20 rounded"><img src="{{ asset('storage/' . $product->image) }}" class="aspect-ratio-img p-1" /></div> -->
+                            <!-- <div class="w-[160px] h-[160px] flex justify-center bg-white m-1 border border-black/50 dark:border-white/20 rounded"><img src="{{ asset($product->image) }}" class="aspect-ratio-img p-1" /></div> -->
                             <div class="w-[240px] h-[240px] hover:bg-gray-400 bg-white hover:opacity-50 flex justify-center items-center text-xl border border-black/50 dark:border-white/20 rounded-lg">
-                                <img src="{{ asset('storage/' . $product->image)}}" class="aspect-ratio-img p-1" />
+                                <img src="{{ asset($product->image)}}" class="aspect-ratio-img p-1" />
                             </div>
                         </td>
                         <td>{{ $product->name }}</td>
@@ -46,15 +46,23 @@
                         <td>
                             <div class="flex gap-4 justify-end m-8">
                                 <a href="{{ route('admin.products.show', $product->id) }}">
-                                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">
-                                        View
+                                    <button class="ml-2 text-green-500 hover:text-gray-700">
+                                        <i data-lucide="eye"></i>
                                     </button>
                                 </a>
                                 <a href="{{ route('admin.products.edit', $product->id) }}">
-                                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">
-                                        Edit
+                                    <button class="ml-2 text-gray-500 hover:text-gray-700">
+
+                                        <i data-lucide="edit"></i>
                                     </button>
                                 </a>
+                                <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700">
+                                        <i data-lucide="trash"></i>
+                                    </button>
+                                </form>
 
                             </div>
                         </td>

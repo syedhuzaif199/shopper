@@ -21,6 +21,15 @@
             })
 
         })
+
+        function toggleCollapsible(id) {
+            const ele = document.getElementById(id);
+            document.getElementById("chev-right-" + id).classList.toggle('hidden');
+            document.getElementById("chev-down-" + id).classList.toggle('hidden');
+            if (ele) {
+                ele.classList.toggle('hidden');
+            }
+        }
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

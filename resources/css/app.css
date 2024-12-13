@@ -39,3 +39,4 @@ input[type="number"] {                                           /**/
 .admin-view-table tr td:first-child, th:first-child {
     @apply pl-4;
 }
+

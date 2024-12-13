@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = Category::factory(7)->create();
+        $this->call(CategorySeeder::class);
+        $categories = Category::all();
+        $categories->each(function ($category) {
+            Product::factory(random_int(0, 10))->create(['category_id' => $category->id]);
+        });
         User::create([
             'username' => 'admin',
             'email' => 'admin@shopper.com',

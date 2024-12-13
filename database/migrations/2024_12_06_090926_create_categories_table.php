@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name'); //unique ?
-            $table->integer('lft')->nullable(false);
-            $table->integer('rgt')->nullable(false);
-
+            $table->nestedSet(); // Adds _lft, _rgt, parent_id columns
             $table->timestamps();
         });
     }

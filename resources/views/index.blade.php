@@ -21,7 +21,7 @@
             @foreach($products as $item)
             <a href="/products/{{ $item->id }}">
                 <div class="w-[240px] h-[240px] hover:bg-gray-400 bg-white hover:opacity-50 flex justify-center items-center text-xl border border-black/50 dark:border-white/20 rounded-lg">
-                    <img src="{{ asset('storage/' . $item->image)}}" class="aspect-ratio-img p-1" />
+                    <img src="{{ $item->image }}" class="aspect-ratio-img p-1" />
                 </div>
                 <p class="font-bold mt-5 mb-1">
                     ${{ $item->price}}

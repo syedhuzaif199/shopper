@@ -6,7 +6,7 @@
             @csrf
             @method('PATCH')
             <div>
-                <label class="block text-sm/6 font-medium dark:text-white/80">Product Title</label>
+                <label class="block text-sm/6 font-medium dark:text-white/80">Product Name</label>
                 <x-form-input name="name" type="text" value="{{ $product->name }}" requried />
             </div>
 

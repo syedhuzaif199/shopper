@@ -5,7 +5,7 @@
         <form class="space-y-6" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
-                <label class="block text-sm/6 font-medium dark:text-white/80">Product Title</label>
+                <label class="block text-sm/6 font-medium dark:text-white/80">Product Name</label>
                 <x-form-input name="name" type="text" value="{{ old('name') }}" requried />
             </div>
 
@@ -30,7 +30,7 @@
 
             <div>
                 <label for="image" class="block text-sm/6 font-medium dark:text-white/80">Product Image</label>
-                <x-form-input name="image" type="file" required />
+                <x-form-input name="image" type="file" value="{{ old('image') }}" required />
             </div>
 
 
