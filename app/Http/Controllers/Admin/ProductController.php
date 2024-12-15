@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::withDepth()->get()->toTree();
         return view("admin.products.create", compact('categories'));
     }
 
@@ -37,16 +37,20 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
-            'category_id' => ['required', 'exists:categories,id'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
+        if ($request->category_id) {
+            $request->validate([
+                'category_id' => ['exists:categories,id'],
+            ]);
+        }
 
         // log the validation errors
 
 
         $imageName = time() . '.' . $request->image->extension();
-        $imgPath = $request->image->storeAs('products', $imageName, 'public');
+        $imgPath = '/storage/' . $request->image->storeAs('products', $imageName, 'public');
 
         Product::create([
             'name' => $request->name,
@@ -72,7 +76,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = Category::all();
+        $categories = Category::withDepth()->get()->toTree();
         return view("admin.products.edit", compact("product", 'categories'));
     }
 
@@ -81,15 +85,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $request->validate([
+        $attributes = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
-            'category_id' => ['required', 'exists:categories,id'],
+            // 'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ]);
+        if ($request->category_id) {
+            $request->validate([
+                'category_id' => ['exists:categories,id'],
+            ]);
+        }
+        $request->validate([
             'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
-        $product->update($request->except('image'));
+        $attributes['category_id'] = $request->category_id;
+
+        $product->update($attributes);
 
         if ($request->hasFile('image')) {
             // Delete the old image if it exists

@@ -1,8 +1,8 @@
 <x-admin>
-    <div class="border border-black/50 dark:border-white/20 rounded-xl p-10">
+    <div>
         <h1 class=text-4xl>Product</h1>
         <x-divider />
-        <div class="space-y-10">
+        <div class="border border-black/50 dark:border-white/20 rounded-xl p-10 space-y-10">
             <div>
                 <h1 class="text-2xl mb-4">Product ID:</h1>
                 <p class="text-xl">{{ $product->id }}</p>
@@ -14,13 +14,13 @@
             </div>
             <div>
                 <h1 class="text-2xl mb-4">Product Category:</h1>
-                <p class="text-xl">{{ $product->category->name}}</p>
+                <p class="text-xl">{{ $product->category ? $product->category->name : 'None'}}</p>
             </div>
             <x-divider />
             <div>
                 <h1 class="text-2xl mb-4">Product Images</h1>
-                <div class="w-[240px] h-[240px]">
-                    <img src="{{ asset($product->image) }}" class="aspect-ration-img p-1">
+                <div class="w-[240px] h-[240px] border border-black/50 dark:border-white/20">
+                    <img src="{{ $product->image }}" class="aspect-ration-img p-1">
                 </div>
             </div>
             <x-divider />

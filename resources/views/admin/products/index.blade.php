@@ -35,13 +35,12 @@
                             {{ $product->id }}
                         </td>
                         <td class="flex justify-center">
-                            <!-- <div class="w-[160px] h-[160px] flex justify-center bg-white m-1 border border-black/50 dark:border-white/20 rounded"><img src="{{ asset($product->image) }}" class="aspect-ratio-img p-1" /></div> -->
-                            <div class="w-[240px] h-[240px] hover:bg-gray-400 bg-white hover:opacity-50 flex justify-center items-center text-xl border border-black/50 dark:border-white/20 rounded-lg">
-                                <img src="{{ asset($product->image)}}" class="aspect-ratio-img p-1" />
+                            <div class="w-[240px] h-[240px] border border-black/50 dark:border-white/20">
+                                <img src="{{ $product->image}}" class="aspect-ratio-img p-1" />
                             </div>
                         </td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->category->name }}</td>
+                        <td>{{ $product->category ? $product->category->name : 'None'}}</td>
                         <td>${{ $product->price }}</td>
                         <td>
                             <div class="flex gap-4 justify-end m-8">
@@ -71,13 +70,13 @@
                 </tbody>
             </table>
             @if($products->isEmpty())
-            <p class="flex justify-center text-4xl mt-10">Nothing to show here!</p>
-            @endif
-
-
-            <div class="mt-4">
-                {{ $products->links() }}
+            <div class="text-2xl text-gray-500 mt-4">
+                Nothing to show here!
             </div>
+            @endif
+            <x-divider />
+
+            {{ $products->links() }}
         </div>
     </div>
 </x-admin>

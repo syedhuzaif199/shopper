@@ -29,6 +29,7 @@
                     }
                     ?>
                 </select>
+                <x-form-error field="parent_id" />
             </div>
 
             <div>

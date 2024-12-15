@@ -34,7 +34,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'parent_id' => ['nullable', 'exists:categories,id'],
+        ]);
+
+        Category::create($attributes);
+        return redirect()->route('admin.categories.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -69,16 +75,29 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        dd(request()->all());
+        $attributes = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $category->update($attributes);
+        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        if ($category->descendants->count() > 0) {
+            return redirect()->route('admin.categories.index')->with('error', 'Category has subcategories');
+        }
+        $products = $category->products;
+        $products->each(function ($product) use ($category) {
+            $product->update(['category_id' => $category->parent_id]);
+        });
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully');
     }
 }

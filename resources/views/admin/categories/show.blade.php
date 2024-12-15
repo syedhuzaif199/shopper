@@ -4,23 +4,25 @@
             <h1 class=text-4xl>Category</h1>
             <div class="flex justify-end gap-4 items-center">
 
-                <a href="{{ route('admin.products.edit', $category->id) }}">
-                    <button class="ml-2 text-gray-500 hover:text-gray-700">
+                <a href="{{ route('admin.categories.edit', $category->id) }}" class="ml-2 text-gray-500 hover:text-gray-700">
+                    <i data-lucide="edit"></i>
 
-                        <i data-lucide="edit"></i>
-                    </button>
                 </a>
-                <form action="{{ route('admin.products.destroy', $category->id) }}" method="POST">
+                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="flex items-center">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-red-500 hover:text-red-700">
+                    <button type="submit"
+                        class="{{ $category->children->isEmpty() ? 'text-red-500 hover:text-red-700' : 'text-black/10 dark:text-white/10'}} items-center"
+                        title="{{ $category->children->isNotEmpty() ? 'Cannot delete categories with children' : ''}}"
+                        {{$category->children->isNotEmpty() ? 'disabled' : ''}}>
                         <i data-lucide="trash"></i>
                     </button>
                 </form>
+
             </div>
         </div>
         <x-divider />
-        <div class="space-y-10 border rounded-xl p-8 max-w-[75%]">
+        <div class="border border-black/50 dark:border-white/20 rounded-xl p-10 space-y-10 border rounded-xl p-8 max-w-[75%]">
             <div>
                 <h1 class="text-2xl mb-4">Category ID:</h1>
                 <p class="text-xl">{{ $category->id }}</p>

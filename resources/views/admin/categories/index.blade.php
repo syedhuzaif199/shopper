@@ -17,9 +17,15 @@
         </div>
         <x-divider />
 
+        @if($categories->isEmpty())
+        <div class="text-2xl text-gray-500">
+            No categories found
+        </div>
+        @else
         <div>
             <i data-lucide="x"></i>
         </div>
+        @endif
 
         <div class="ml-2.5">
             @foreach ($categories as $category)

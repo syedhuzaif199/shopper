@@ -1,5 +1,5 @@
 <x-admin>
-    <h1 class="text-4xl">Edit Product</h1>
+    <h1 class="text-4xl">Edit Product: {{ $product->name }}</h1>
     <x-divider />
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
@@ -12,12 +12,29 @@
 
             <div>
                 <label for="category_id" class="block text-sm/6 font-medium dark:text-white/80">Product Category</label>
-                <select name="category_id" required class="block w-full rounded-md bg-white/10 px-3 py-3 text-base text-gray-900 dark:text-white/80 outline outline-1 -outline-offset-1 dark:outline-white/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                    <option value="">Select a category</option>
-                    @foreach($categories as $category)
+                <select name="category_id" class="block w-full rounded-md bg-white/10 px-3 py-3 text-base text-gray-900 dark:text-white/80 outline outline-1 -outline-offset-1 dark:outline-white/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option value="">None</option>
+                    <?php
+                    $stack = [];
+                    foreach ($categories as $category) {
+                        $stack[] = $category;
+                        while (count($stack) > 0) {
+                            $current = array_pop($stack);
+                            $indent = str_repeat('&nbsp &nbsp &nbsp', $current->depth) . '└─';
+                            $attribs = old('category_id') == $current->id ? 'selected' : '';
+                            echo "<option value='{$current->id}' {$attribs}>{$indent} {$current->name}</option>";
+                            foreach ($current->children as $child) {
+                                $child->depth = $current->depth + 1;
+                                $stack[] = $child;
+                            }
+                        }
+                    }
+                    ?>
+                    <!-- @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
-                    @endforeach
+                    @endforeach -->
                 </select>
+                <x-form-error field="category_id" />
             </div>
             <div>
                 <label for="price" class="block text-sm/6 font-medium dark:text-white/80">Price</label>

@@ -1,5 +1,5 @@
 <x-admin>
-    <h1 class="text-4xl">Edit Category</h1>
+    <h1 class="text-4xl">Edit Category: {{ $category->name }}</h1>
     <x-divider />
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" action="{{ route('admin.categories.update', $category->id) }}" method="POST">

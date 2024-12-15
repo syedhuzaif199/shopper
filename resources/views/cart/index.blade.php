@@ -6,7 +6,7 @@
             <x-divider />
         </div>
         @foreach($cart as $item)
-        <x-cart-card product_id="{{ $item->product->id }}" quantity="{{ $item->quantity }}" img="{{ asset('storage' . $item->product->image)}}" title="{{ $item->product->name}}" price="${{ $item->product->price }}" />
+        <x-cart-card product_id="{{ $item->product->id }}" quantity="{{ $item->quantity }}" img="{{  $item->product->image}}" title="{{ $item->product->name}}" price="${{ $item->product->price }}" />
         @endforeach
 
 
