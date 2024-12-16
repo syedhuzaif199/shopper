@@ -9,7 +9,7 @@
             @endif
             <div>
                 <a href="{{ route('admin.products.create') }}">
-                    <button class="bg-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                    <button class="bg-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" title="Create Product">
                         Create Product
                     </button>
                 </a>
@@ -25,6 +25,8 @@
                         <th class="text-left">Name</th>
                         <th class="text-left">Category</th>
                         <th class="text-left">Price</th>
+                        <th class="text-left">Stock</th>
+                        <th class="text-left">GST</th>
                         <th class="text-left">Actions</th>
                     </tr>
                 </thead>
@@ -42,23 +44,24 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category ? $product->category->name : 'None'}}</td>
                         <td>${{ $product->price }}</td>
+                        <td>{{$product->stock}}</td>
+                        <td>{{ $product->gst_perc }}%</td>
                         <td>
                             <div class="flex gap-4 justify-end m-8">
                                 <a href="{{ route('admin.products.show', $product->id) }}">
-                                    <button class="ml-2 text-green-500 hover:text-gray-700">
+                                    <button class="ml-2 text-green-500 hover:text-gray-700" title="View Product">
                                         <i data-lucide="eye"></i>
                                     </button>
                                 </a>
                                 <a href="{{ route('admin.products.edit', $product->id) }}">
-                                    <button class="ml-2 text-gray-500 hover:text-gray-700">
-
+                                    <button class="ml-2 text-gray-500 hover:text-gray-700" title="Edit Product">
                                         <i data-lucide="edit"></i>
                                     </button>
                                 </a>
                                 <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700">
+                                    <button type="submit" class="text-red-500 hover:text-red-700" title="Delete Product">
                                         <i data-lucide="trash"></i>
                                     </button>
                                 </form>

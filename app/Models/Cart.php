@@ -10,11 +10,7 @@ class Cart extends Model
     /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
 
-    protected $fillable = [
-        'product_id',
-        'user_id',
-        'quantity',
-    ];
+    protected $guarded = [];
 
     public function product()
     {

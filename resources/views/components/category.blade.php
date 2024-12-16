@@ -22,13 +22,17 @@
                     <p class="text-2xl">{{ $category->name }}</p>
                 </div>
                 <div class="flex items-center px-4 gap-4">
-                    <a href="{{ route('admin.categories.show', $category->id) }}" class="ml-2 text-green-500 hover:text-gray-700">
-                        <i data-lucide="eye"></i>
+                    <a href="{{ route('admin.categories.show', $category->id) }}">
+                        <button title="View Category" class="ml-2 text-green-500 hover:text-gray-700" title="View Category">
+                            <i data-lucide="eye"></i>
+                        </button>
                     </a>
-                    <a href="{{ route('admin.categories.edit', $category) }}" class="ml-2 text-gray-500 hover:text-gray-700">
-                        <i data-lucide="edit"></i>
+                    <a href="{{ route('admin.categories.edit', $category) }}">
+                        <button class="ml-2 text-gray-500 hover:text-gray-700" title="Edit Category">
+                            <i data-lucide="edit"></i>
+                        </button>
                     </a>
-                    <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="flex items-center">
+                    <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="items-center">
                         @csrf
                         @method('DELETE')
                         <button type="submit"

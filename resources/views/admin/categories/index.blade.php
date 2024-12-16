@@ -9,7 +9,7 @@
             @endif
             <div>
                 <a href="{{ route('admin.categories.create') }}">
-                    <button class="bg-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                    <button class="bg-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" title="Create Category">
                         Create Category
                     </button>
                 </a>

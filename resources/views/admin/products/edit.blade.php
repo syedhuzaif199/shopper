@@ -21,7 +21,7 @@
                         while (count($stack) > 0) {
                             $current = array_pop($stack);
                             $indent = str_repeat('&nbsp &nbsp &nbsp', $current->depth) . '└─';
-                            $attribs = old('category_id') == $current->id ? 'selected' : '';
+                            $attribs = $product->category_id === $current->id ? 'selected' : '';
                             echo "<option value='{$current->id}' {$attribs}>{$indent} {$current->name}</option>";
                             foreach ($current->children as $child) {
                                 $child->depth = $current->depth + 1;
@@ -30,15 +30,22 @@
                         }
                     }
                     ?>
-                    <!-- @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
-                    @endforeach -->
                 </select>
                 <x-form-error field="category_id" />
             </div>
             <div>
                 <label for="price" class="block text-sm/6 font-medium dark:text-white/80">Price</label>
                 <x-form-input name="price" value="{{ $product->price }}" type="number" step="0.01" required />
+            </div>
+
+            <div>
+                <label for="stock" class="block text-sm/6 font-medium dark:text-white/80">Stock</label>
+                <x-form-input name="stock" value="{{ $product->stock}}" type="number" required />
+            </div>
+
+            <div>
+                <label for="gst_perc" class="block text-sm/6 font-medium dark:text-white/80">GST (in percents)</label>
+                <x-form-input name="gst_perc" value="{{ $product->gst_perc}}" type="number" step="0.01" required />
             </div>
 
             <div>

@@ -18,12 +18,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'username',
-        'email',
-        'password',
-        'role',
-    ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,5 +58,15 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === "admin";
+    }
+
+    public function isEmployee(): bool
+    {
+        return $this->role === "employee";
+    }
+
+    public function customerAddresses(): HasMany
+    {
+        return $this->hasMany(CustomerAddress::class);
     }
 }

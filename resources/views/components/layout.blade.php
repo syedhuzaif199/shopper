@@ -25,7 +25,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100 dark:bg-black dark:text-white pb-10">
+<body class="bg-gray-100 dark:bg-black text-black dark:text-white h-[100vh]">
     <div class="px-10">
         <nav class="w-full h-[80px] border-b border-black/50 dark:border-white/10 mb-10 flex items-center justify-between">
             <div class="w-[33%]">
@@ -59,7 +59,7 @@
             </div>
         </nav>
 
-        <main class="max-w-[90% ] mx-auto">
+        <main class="max-w-[90% ] mx-auto pb-10">
             {{ $slot }}
         </main>
     </div>

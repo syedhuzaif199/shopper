@@ -37,6 +37,8 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
+            'stock' => ['required', 'numeric', 'min:0'],
+            'gst_perc' => ['required', 'numeric', 'min:0', 'max:100'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
@@ -56,6 +58,8 @@ class ProductController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
+            'stock' => $request->stock,
+            'gst_perc' => $request->gst_perc,
             'category_id' => $request->category_id,
             'image' => $imgPath,
         ]);
@@ -89,8 +93,11 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
+            'stock' => ['required', 'numeric', 'min:0'],
+            'gst_perc' => ['required', 'numeric', 'min:0', 'max:100'],
             // 'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
+
         if ($request->category_id) {
             $request->validate([
                 'category_id' => ['exists:categories,id'],
@@ -110,7 +117,7 @@ class ProductController extends Controller
                 Storage::disk('public')->delete($product->image);
             }
             $imageName = time() . '.' . $request->image->extension();
-            $imgPath = $request->image->storeAs('products', $imageName, 'public');
+            $imgPath = '/storage/' . $request->image->storeAs('products', $imageName, 'public');
             $product->update(['image' => $imgPath]);
         }
 

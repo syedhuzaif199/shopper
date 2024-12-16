@@ -25,7 +25,8 @@ class ProductFactory extends Factory
             "description" => $this->faker->text(),
             "price" => $this->faker->randomFloat(2, 1, 1000),
             "image" => $imgUrl,
-            "category_id" => Category::inRandomOrder()->first()->id,
+            "stock" => $this->faker->numberBetween(1, 100),
+            "gst_perc" => $this->faker->randomFloat(2, 10, 20),
         ];
     }
 }

@@ -10,10 +10,7 @@ class Order extends Model
     /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'status',
-    ];
+    protected $guarded = [];
 
     public function user()
     {
@@ -23,5 +20,10 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
+    }
+
+    public function customerAddress()
+    {
+        return $this->belongsTo(CustomerAddress::class);
     }
 }
