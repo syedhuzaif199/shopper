@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerAddressController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\HomeController;
@@ -22,6 +24,11 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [SessionController::class, 'store']);
     Route::get('/register', [RegisteredUserController::class, 'create']);
     Route::post('/register', [RegisteredUserController::class, 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', CheckoutController::class);
+    Route::post('/addresses', [CustomerAddressController::class, 'store']);
 });
 
 

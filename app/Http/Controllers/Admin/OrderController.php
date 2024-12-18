@@ -78,23 +78,26 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // if request has archived key, update archived status
+        if ($request->has('archived')) {
+            $archived = $request->validate([
+                'archived' => ['required', 'boolean'],
+            ]);
+
+
+            $order = Order::findOrFail($id);
+            $order->update(['archived' => $request->archived]);
+            return redirect()->route('admin.orders.index')->with('success', 'Order archived status updated successfully');
+        }
+
         $attributes = $request->validate([
             'status' => ['required', 'in:' . implode(',', $this->status_options)],
             'payment_status' => ['required', 'in:' . implode(',', $this->payment_status_options)],
         ]);
 
-
         $order = Order::findOrFail($id);
         $order->update($attributes);
 
         return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

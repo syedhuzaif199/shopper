@@ -45,8 +45,18 @@
 
             <div>
                 @if($order->customerAddress)
-                <h1 class="text-2xl mb-4">Customer Address Details:</h1>
-                <div class="space-y-4 border rounded border-white/20 p-4 mt-8">
+                <!-- 'ord-' prepended to $order->id to uniquely identify elements related to order items -->
+                <div class="flex items-center" onclick="toggleCollapsible('ord-{{ $order->id }}')">
+                    <span class="hidden" id="chev-down-ord-{{ $order->id }}">
+                        <i data-lucide="chevron-down"></i>
+                    </span>
+                    <span id="chev-right-ord-{{ $order->id }}">
+                        <i data-lucide="chevron-right"></i>
+                    </span>
+                    <span class="text-2xl">Customer Address Details</span>
+
+                </div>
+                <div id="ord-{{ $order->id }}" class=" hidden space-y-4 border bg-white/5 rounded border-white/20 p-4 mt-8">
                     <h2 class="text-xl font-bold">Customer Address ID:</h2>
                     <p class="text-xl">{{ $order->customer_address_id}}</p>
                     <x-divider />
@@ -67,7 +77,7 @@
                     <p class="text-xl">{{ $order->customerAddress->country}}</p>
                     <x-divider />
 
-                    <h2 class="text-xl font-bold">Zip:</h2>
+                    <h2 class="text-xl font-bold">Pincode:</h2>
                     <p class="text-xl">{{ $order->customerAddress->pincode}}</p>
                     <x-divider />
 
@@ -89,10 +99,59 @@
                 @else
                 <h1 class="text-2xl mb-4">Not found</h1>
                 @endif
+
+            </div>
+
+            <x-divider />
+
+            <div>
+                <!-- 'ord-prod-' prepended to $order->id to uniquely identify elements related to order table items -->
+                <div class="flex items-center" onclick="toggleCollapsible('ord-prod-{{ $order->id }}')">
+                    <span class="hidden" id="chev-down-ord-prod-{{ $order->id }}">
+                        <i data-lucide="chevron-down"></i>
+                    </span>
+                    <span id="chev-right-ord-prod-{{ $order->id }}">
+                        <i data-lucide="chevron-right"></i>
+                    </span>
+                    <span class="text-2xl">Ordered Products</span>
+
+                </div>
+                <div id="ord-prod-{{ $order->id }}" class="hidden p-4 mt-8">
+                    <table class="admin-view-table">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Product ID</th>
+                                <th class="text-left">Product Name</th>
+                                <th class="text-left">Quantity</th>
+                                <th class="text-left">Price per item</th>
+                                <th class="text-left">GST</th>
+                                <th class="text-left">Total Price</th>
+                                <th class="text-left">Discount</th>
+                                <th class="text-left">Grand Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($order->products as $product)
+                            <tr>
+                                <td>{{ $product->id}}</td>
+                                <td>{{ $product->name}}</td>
+                                <td>{{ $product->pivot->quantity}}</td>
+                                <td>${{ $product->pivot->price}}</td>
+                                <td>{{ $product->pivot->gst_perc}}%</td>
+                                <td>${{ $product->pivot->total}}</td>
+                                <td>{{ $product->pivot->discount}}%</td>
+                                <td>${{ $product->pivot->grand_total}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
             <x-divider />
 
             <div class="flex justify-end gap-4 items-center">
+                <x-form-error field='archived' />
 
                 <a href="{{ route('admin.orders.edit', $order->id) }}">
                     <button class="ml-2 text-gray-500 hover:text-gray-700">
@@ -102,9 +161,10 @@
                 </a>
                 <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-500 hover:text-red-700">
-                        <i data-lucide="trash"></i>
+                    @method('PATCH')
+                    <button type="submit" class="text-purple-600 hover:text-purple-800">
+                        <input type="hidden" name="archived" value="1">
+                        <i data-lucide="archive"></i>
                     </button>
                 </form>
             </div>

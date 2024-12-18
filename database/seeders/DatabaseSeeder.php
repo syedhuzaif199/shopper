@@ -33,10 +33,35 @@ class DatabaseSeeder extends Seeder
         ]);
         User::factory(100)->create();
         $users = User::all();
-        $users->each(function ($user) {
+        $products = Product::all();
+        $users->each(function ($user) use ($products) {
             CustomerAddress::factory(random_int(0, 3))->create(['user_id' => $user->id]);
             if ($user->customerAddresses->count() !== 0) {
-                Order::factory(random_int(0, 5))->create(['user_id' => $user->id, 'customer_address_id' => $user->customerAddresses->random()->id]);
+                $orders = Order::factory(random_int(0, 5))->create([
+                    'user_id' => $user->id,
+                    'customer_address_id' => $user->customerAddresses->random()->id
+                ]);
+
+                $orders->each(function ($order) use ($products) {
+                    $ordered_products = $products->random(random_int(1, 5));
+                    $ordered_products->each(function ($product) use ($order) {
+                        $discount = random_int(0, 75);
+                        $quantity = random_int(1, 5);
+                        $total_price = $quantity * $product->price - $quantity * $product->price * $discount / 100;
+                        $order->products()->attach(
+                            $product->id,
+                            [
+                                'quantity' => $quantity,
+                                'price' => $product->price,
+                                'gst_perc' => $product->gst_perc,
+                                'total' => $total_price,
+                                'discount_perc' => $discount,
+                                'grand_total' => $total_price - ($total_price * $discount / 100),
+
+                            ]
+                        );
+                    });
+                });
             }
         });
     }

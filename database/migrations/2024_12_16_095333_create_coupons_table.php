@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->enum('type', ['fixed', 'percentage']);
+            // sqlite does not support enum, so use check instead
+            // $table->enum('discount_type', ['fixed', 'percentage']);
+            $table->string('discount_type')->check('discount_type IN ("fixed", "percentage")');
             $table->integer('value');
             $table->integer('min_order_amount')->nullable();
             $table->integer('max_discount_amount')->nullable();

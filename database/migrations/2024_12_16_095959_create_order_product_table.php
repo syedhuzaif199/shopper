@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('order_product', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->integer('gst_perc');
+            $table->integer('total');
+            $table->integer('discount_perc');
+            $table->integer('grand_total');
+            $table->text('note')->nullable();
+
             $table->timestamps();
         });
     }

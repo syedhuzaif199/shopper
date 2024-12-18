@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('payment_status', ['pending', 'paid', 'failed']);
             $table->float('total_price');
             $table->foreignIdFor(CustomerAddress::class);
+            $table->boolean('archived')->default(false);
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 <x-layout>
     <section class="w-full">
         <div class="flex h-fit items-center">
-            <i data-lucide="chevron-right"></i>
+            <!-- <i data-lucide="brackets"></i> -->
             <h1 class="text-2xl pl-2">Categories</h1>
         </div>
         <div class="flex items-center mt-4 w-full space-x-4 h-[200px] overflow-x-auto">
@@ -15,7 +15,7 @@
 
 
     <div class="mt-10 flex items-center">
-        <i data-lucide="chevron-right"></i>
+        <!-- <i data-lucide="brackets"></i> -->
         <h1 class="text-2xl pl-2">Featured</h1>
     </div>
 

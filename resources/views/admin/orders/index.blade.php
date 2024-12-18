@@ -7,6 +7,11 @@
                 {{ session('success') }}
             </div>
             @endif
+            @error('archived')
+            <div class="text-red-500">
+                {{ 'Error: ' . $message }}
+            </div>
+            @enderror
         </div>
         <x-divider />
         <div>
@@ -21,6 +26,7 @@
                         <th class="text-left">Payment Status</th>
                         <th class="text-left">Total Price</th>
                         <th class="text-left">Customer Address ID</th>
+                        <th class="text-left">Archived</th>
                         <th class="text-left">Actions</th>
                     </tr>
                 </thead>
@@ -35,6 +41,7 @@
                         <td class="{{ $payment_status_colors[$order->payment_status] }}">{{ $order->payment_status}}</td>
                         <td>{{ $order->total_price}}</td>
                         <td>{{ $order->customer_address_id}}</td>
+                        <td>{{ $order->archived ? 'Yes' : 'No'}}</td>
                         <td>
                             <div class="flex gap-4 justify-end m-8">
                                 <a href="{{ route('admin.orders.show', $order->id) }}">
@@ -50,9 +57,10 @@
                                 </a>
                                 <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-purple-600 hover:text-purple-800" title="Archive Order">
-                                        <i data-lucide="archive"></i>
+                                    @method('PATCH')
+                                    <button type="submit" class="{{ $order->archived ? 'text-yellow-600 hover:text-yellow-800' : 'text-purple-600 hover:text-purple-800' }}" title="{{ $order->archived ? 'Restore order' : 'Archive Order' }}">
+                                        <input type="hidden" name="archived" value="{{ $order->archived ? 0 : 1 }}">
+                                        <i data-lucide="{{ $order->archived ? 'archive-restore' : 'archive' }}"></i>
                                     </button>
                                 </form>
 
