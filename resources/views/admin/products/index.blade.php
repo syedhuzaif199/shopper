@@ -17,6 +17,7 @@
         </div>
         <x-divider />
         <div>
+            @if($products->isNotEmpty())
             <table class="admin-view-table">
                 <thead>
                     <tr class>
@@ -27,6 +28,7 @@
                         <th class="text-left">Price</th>
                         <th class="text-left">Stock</th>
                         <th class="text-left">GST</th>
+                        <th class="text-left">Discount</th>
                         <th class="text-left">Actions</th>
                     </tr>
                 </thead>
@@ -37,15 +39,18 @@
                             {{ $product->id }}
                         </td>
                         <td class="flex justify-center">
-                            <div class="w-[240px] h-[240px] border border-black/50 dark:border-white/20">
+                            <div class="w-[240px] h-[240px] flex justify-center border border-black/50 dark:border-white/20">
                                 <img src="{{ $product->image}}" class="aspect-ratio-img p-1" />
                             </div>
                         </td>
-                        <td>{{ $product->name }}</td>
+                        <td>
+                            {{ $product->name }}
+                        </td>
                         <td>{{ $product->category ? $product->category->name : 'None'}}</td>
                         <td>${{ $product->price }}</td>
                         <td>{{$product->stock}}</td>
                         <td>{{ $product->gst_perc }}%</td>
+                        <td>{{ $product->discount_perc}}%</td>
                         <td>
                             <div class="flex gap-4 justify-end m-8">
                                 <a href="{{ route('admin.products.show', $product->id) }}">
@@ -72,7 +77,7 @@
                     @endforeach
                 </tbody>
             </table>
-            @if($products->isEmpty())
+            @else
             <div class="text-2xl text-gray-500 mt-4">
                 Nothing to show here!
             </div>

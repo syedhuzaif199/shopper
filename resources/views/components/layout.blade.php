@@ -18,9 +18,56 @@
                 } else {
                     img.classList.add("w-full");
                 }
-            })
+            });
+            document.querySelectorAll("input[name='customer_address_id']").forEach((ele) => {
+                console.log(ele);
+                ele.addEventListener('click', function() {
+                    selectAddressOption(this);
+                });
+                if (ele.checked) {
+                    selectAddressOption(ele);
+                }
+            });
 
-        })
+            document.querySelectorAll("input[name='payment_method']").forEach((ele) => {
+                console.log(ele);
+                ele.addEventListener('click', function() {
+                    selectPaymentOption(this);
+                });
+                if (ele.checked) {
+                    selectPaymentOption(ele);
+                }
+            });
+
+        });
+
+
+        function toggleCollapsible(id) {
+            const ele = document.getElementById(id);
+            document.getElementById("chev-right-" + id).classList.toggle('hidden');
+            document.getElementById("chev-down-" + id).classList.toggle('hidden');
+            if (ele) {
+                ele.classList.toggle('hidden');
+            }
+        }
+
+        function selectAddressOption(clickedEle) {
+            document.querySelectorAll('.address-select').forEach((ele) => {
+                ele.classList.remove('bg-green-600');
+                ele.classList.remove('address-select')
+            });
+            clickedEle.parentElement.classList.toggle('bg-green-600');
+            clickedEle.parentElement.classList.toggle('address-select');
+        }
+
+        function selectPaymentOption(clickedEle) {
+            document.querySelectorAll('.payment-select').forEach((ele) => {
+                ele.classList.remove('bg-green-600');
+                ele.classList.remove('payment-select')
+            });
+            clickedEle.parentElement.classList.toggle('bg-green-600');
+            clickedEle.parentElement.classList.toggle('payment-select');
+        }
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -55,6 +102,7 @@
                     @method('DELETE')
                     <button type="submit" class="px-3 py-2 dark:hover:bg-white/10 hover:bg-gray-200 rounded-xl">Log out</button>
                 </form>
+                <a href="/orders" class="px-3 py-2 dark:hover:bg-white/10 hover:bg-gray-200 rounded-xl">My Orders</a>
                 @endauth
             </div>
         </nav>

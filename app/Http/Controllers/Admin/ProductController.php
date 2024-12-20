@@ -39,6 +39,7 @@ class ProductController extends Controller
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'numeric', 'min:0'],
             'gst_perc' => ['required', 'numeric', 'min:0', 'max:100'],
+            'discount_perc' => ['required', 'numeric', 'min:0', 'max:100'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
@@ -60,6 +61,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => $request->stock,
             'gst_perc' => $request->gst_perc,
+            'discount_perc' => $request->discount_perc,
             'category_id' => $request->category_id,
             'image' => $imgPath,
         ]);
@@ -95,6 +97,7 @@ class ProductController extends Controller
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'numeric', 'min:0'],
             'gst_perc' => ['required', 'numeric', 'min:0', 'max:100'],
+            'discount_perc' => ['required', 'numeric', 'min:0', 'max:100'],
             // 'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 

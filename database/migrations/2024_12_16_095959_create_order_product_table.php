@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Coupon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,9 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('price');
             $table->integer('gst_perc');
-            $table->integer('total');
             $table->integer('discount_perc');
-            $table->integer('grand_total');
             $table->text('note')->nullable();
 
             $table->timestamps();

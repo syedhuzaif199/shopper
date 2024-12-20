@@ -13,7 +13,7 @@ class HomeController extends Controller
 
         return view('index', [
             'products' => Product::latest()->take(10)->get(),
-            'categories' => Category::all()
+            'categories' => Category::withDepth()->get()->toTree(),
         ]);
     }
 }

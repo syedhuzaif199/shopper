@@ -15,7 +15,6 @@
 
 
     <div class="mt-10 flex items-center">
-        <!-- <i data-lucide="brackets"></i> -->
         <h1 class="text-2xl pl-2">Featured</h1>
     </div>
 
@@ -23,13 +22,19 @@
         <div class="flex space-x-8 overflow-x-auto">
 
             @foreach($products as $item)
-            <a href="/products/{{ $item->id }}">
+            <a href="/products/{{ $item->id }}" class="max-w-[240px]">
                 <div class="w-[240px] h-[240px] hover:bg-gray-400 bg-white hover:opacity-50 flex justify-center items-center text-xl border border-black/50 dark:border-white/20 rounded-lg">
                     <img src="{{ $item->image }}" class="aspect-ratio-img p-1" />
                 </div>
-                <p class="font-bold mt-5 mb-1">
+                <!-- <p class="font-bold mt-5 mb-1">
                     ${{ $item->price}}
-                </p>
+                </p> -->
+                @if($item->discount_perc > 0)
+                <p class="font-bold text-red-500 text-sm mt-5 mb-1 line-through">${{ $item->price }}</p>
+                <p class="font-bold mb-1">${{ $item->price * (1- $item->discount_perc/100) }}</p>
+                @else
+                <p class="font-bold mt-5 mb-1">${{ $item->price }}</p>
+                @endif
                 <p>
                     {{ $item->name }}
                 </p>

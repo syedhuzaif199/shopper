@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -60,7 +61,8 @@ class OrderController extends Controller
     {
         $status_colors = $this->status_colors;
         $payment_status_colors = $this->payment_status_colors;
-        return view("admin.orders.show", compact(['order', 'status_colors', 'payment_status_colors']));
+        $coupons = Coupon::all();
+        return view("admin.orders.show", compact(['order', 'coupons', 'status_colors', 'payment_status_colors']));
     }
 
     /**

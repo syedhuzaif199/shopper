@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             "image" => $imgUrl,
             "stock" => $this->faker->numberBetween(1, 100),
             "gst_perc" => $this->faker->randomFloat(2, 10, 20),
+            "discount_perc" => $this->faker->randomFloat(2, 0, 64),
         ];
     }
 }

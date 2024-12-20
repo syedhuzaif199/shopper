@@ -1,4 +1,4 @@
-@props(['product_id', 'quantity', 'img', 'title', 'price'])
+@props(['product_id', 'quantity', 'img', 'title', 'price', 'discount_perc'])
 <div class="w-full border bg-blur border-black/50 dark:border-white/20 h-[320px] flex items-center justify-between p-10 rounded-lg">
     <a href="/products/{{ $product_id }}" class="h-full aspect-square bg-white border border-black/50 dark:border-white/20 rounded flex items-center justify-center">
         <img src="{{ $img }}" class="aspect-ratio-img hover:opacity-50 rounded" />
@@ -47,7 +47,12 @@
         </div>
 
     </div>
-    <div class="w-[33%] flex justify-end">
-        <p class="text-4xl">{{ $price }}</p>
+    <div class="w-[33%] flex justify-end gap-4">
+        @if($discount_perc > 0)
+        <p class="text-4xl text-red-800 line-through">${{ $price }}</p>
+        <p class="text-4xl text-green-500">${{ $price * (1- $discount_perc/100) }}</p>
+        @else
+        <p class="text-4xl">${{ $price }}</p>
+        @endif
     </div>
 </div>

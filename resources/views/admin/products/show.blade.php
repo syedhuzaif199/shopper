@@ -32,8 +32,15 @@
             <x-divider />
 
             <div>
+                <h1 class="text-2xl mb-4">Product Discount:</h1>
+                <p class="text-xl">{{$product->discount_perc}}%</p>
+            </div>
+            <x-divider />
+
+
+            <div>
                 <h1 class="text-2xl mb-4">Product Images</h1>
-                <div class="w-[240px] h-[240px] border border-black/50 dark:border-white/20">
+                <div class="w-[240px] h-[240px] flex justify-center border border-black/50 dark:border-white/20">
                     <img src="{{ $product->image }}" class="aspect-ration-img p-1">
                 </div>
             </div>
@@ -41,7 +48,7 @@
 
             <div>
                 <h1 class="text-2xl mb-4">Product Description:</h1>
-                <p>{{ $product->description}}</p>
+                <p>{!! nl2br($product->description) !!}</p>
             </div>
 
             <div class="flex justify-end gap-4 items-center">

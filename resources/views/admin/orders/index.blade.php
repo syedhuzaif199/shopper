@@ -15,15 +15,14 @@
         </div>
         <x-divider />
         <div>
+            @if($orders->isNotEmpty())
             <table class="admin-view-table">
                 <thead>
                     <tr class>
                         <th class="text-left">ID</th>
                         <th class="text-left">User ID</th>
                         <th class="text-left">Status</th>
-                        <th class="text-left">Payment Method</th>
-                        <th class="text-left">Payment ID</th>
-                        <th class="text-left">Payment Status</th>
+                        <th class="text-left">Coupon ID</th>
                         <th class="text-left">Total Price</th>
                         <th class="text-left">Customer Address ID</th>
                         <th class="text-left">Archived</th>
@@ -36,9 +35,7 @@
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->user_id}}</td>
                         <td class="{{$status_colors[$order->status] }}">{{ $order->status}}</td>
-                        <td>{{ $order->payment_method}}</td>
-                        <td>{{ $order->payment_id}}</td>
-                        <td class="{{ $payment_status_colors[$order->payment_status] }}">{{ $order->payment_status}}</td>
+                        <td>{{ $order->coupon_id ?? 'None'}}</td>
                         <td>{{ $order->total_price}}</td>
                         <td>{{ $order->customer_address_id}}</td>
                         <td>{{ $order->archived ? 'Yes' : 'No'}}</td>
@@ -70,7 +67,7 @@
                     @endforeach
                 </tbody>
             </table>
-            @if($orders->isEmpty())
+            @else
             <div class="text-2xl text-gray-500 mt-4">
                 Nothing to show here!
             </div>

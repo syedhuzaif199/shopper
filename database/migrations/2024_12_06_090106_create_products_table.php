@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->integer('stock');
             $table->float('gst_perc');
+            $table->float('discount_perc');
             $table->foreignIdFor(Category::class)->nullable();
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('phone');
             $table->boolean('is_default')->default(false);
-            $table->enum("type", ['home', 'office', 'other']);
+            $table->string("type", ['home', 'office', 'other']);
             $table->string('name');
             $table->string('email');
             $table->string('company')->nullable();

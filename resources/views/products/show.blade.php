@@ -19,7 +19,12 @@
 
         <div class="flex flex-col space-y-10 border border-black/50 dark:border-white/20 p-10 overflow-y w-[50%] break-words rounded-lg">
             <h1 class="text-4xl font-bold">{{ $product->name }}</h1>
+            @if($product->discount_perc > 0)
+            <p class="text-4xl text-red-800 line-through">${{ $product->price }}</p>
+            <p class="text-4xl text-green-500">${{ $product->price * (1- $product->discount_perc/100) }}</p>
+            @else
             <p class="text-4xl">${{ $product->price }}</p>
+            @endif
             <h3 class="text-2xl">Description</h3>
             <p>{{ $product->description }}</p>
         </div>

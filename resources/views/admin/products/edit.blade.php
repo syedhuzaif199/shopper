@@ -45,7 +45,17 @@
 
             <div>
                 <label for="gst_perc" class="block text-sm/6 font-medium dark:text-white/80">GST (in percents)</label>
-                <x-form-input name="gst_perc" value="{{ $product->gst_perc}}" type="number" step="0.01" required />
+                <div class="flex">
+                    <x-form-input name="gst_perc" value="{{ $product->gst_perc }}" type="number" step="0.01" class="flex-grow rounded-r-none" required />
+                    <span class="text-sm/6 rounded-md rounded-l-none bg-white/10 px-3 py-1 text-base text-gray-900 dark:text-white/80 outline outline-1 -outline-offset-1 dark:outline-white/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">%</span>
+                </div>
+            </div>
+            <div>
+                <label for="discount_perc" class="block text-sm/6 font-medium dark:text-white/80">Discount (in percents)</label>
+                <div class="flex">
+                    <x-form-input name="discount_perc" value="{{ $product->discount_perc }}" type="number" step="0.01" nclass="flex-grow rounded-r-none" required />
+                    <span class="text-sm/6 rounded-md rounded-l-none bg-white/10 px-3 py-1 text-base text-gray-900 dark:text-white/80 outline outline-1 -outline-offset-1 dark:outline-white/20 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">%</span>
+                </div>
             </div>
 
             <div>

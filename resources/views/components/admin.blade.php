@@ -50,6 +50,7 @@
                 <x-nav-link href="{{ route('admin.products.index') }}">Products</x-nav-link>
                 <x-nav-link href="{{ route('admin.categories.index') }}">Categories</x-nav-link>
                 <x-nav-link href="{{ route('admin.users.index') }}">Users</x-nav-link>
+                <x-nav-link href="{{ route('admin.coupons.index') }}">Coupons</x-nav-link>
             </div>
             <div class="w-[33%] flex justify-end items-center space-x-4">
                 <!-- add user account options -->
