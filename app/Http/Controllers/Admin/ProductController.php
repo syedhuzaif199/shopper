@@ -16,6 +16,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')->paginate(5);
+
+        // add temporary access link to the image
+        $products->map(function ($product) {
+            if (Storage::disk('s3')->exists($product->image)) {
+                $product->image = Storage::disk('s3')->temporaryUrl($product->image, now()->addMinutes(5));
+            }
+            return $product;
+        });
         return view("admin.products.index", compact("products"));
     }
 
@@ -54,6 +62,11 @@ class ProductController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
         $imgPath = '/storage/' . $request->image->storeAs('products', $imageName, 'public');
+
+        // store uploaded image to s3
+        $path = $request->image->storeAs('products', $imageName, 's3');
+        $imgPath = 'products/' . $imageName;
+
 
         Product::create([
             'name' => $request->name,
