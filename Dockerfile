@@ -15,6 +15,11 @@ COPY . .
 
 # Install the PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
+RUN php artisan key:generate
+RUN php artisan migrate:fresh --seed
+RUN npm install
+RUN npm run build
+
 
 # Set permissions for storage and cache
 RUN chmod -R 775 storage bootstrap/cache
