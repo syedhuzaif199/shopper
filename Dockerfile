@@ -21,6 +21,7 @@ RUN chmod -R 775 storage bootstrap/cache
 
 # Expose the port the app will run on
 EXPOSE 9000
+EXPOSE 10000
 
 # Start the PHP-FPM server (backend)
 CMD ["php-fpm"]
