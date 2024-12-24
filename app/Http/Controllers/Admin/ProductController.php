@@ -57,12 +57,7 @@ class ProductController extends Controller
             ]);
         }
 
-        // log the validation errors
-
-
         $imageName = time() . '.' . $request->image->extension();
-        $imgPath = '/storage/' . $request->image->storeAs('products', $imageName, 'public');
-
         // store uploaded image to s3
         $path = $request->image->storeAs('products', $imageName, 's3');
         $imgPath = 'products/' . $imageName;
