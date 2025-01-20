@@ -17,6 +17,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class);
+    }
+
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity', 'price', 'gst_perc', 'discount_perc', 'note');

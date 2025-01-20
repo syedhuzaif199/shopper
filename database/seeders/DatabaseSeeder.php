@@ -38,8 +38,12 @@ class DatabaseSeeder extends Seeder
         $users = User::all();
         $coupons = Coupon::all();
         $users->each(function ($user) use ($coupons) {
-            $user->coupons()->attach($coupons->random(random_int(0, 3)), ['is_used' => false]);
+            $user_coupons = $coupons->where('coupon_type', 'user_specific');
+            $user->coupons()->attach($user_coupons->random(random_int(0, min(3, $user_coupons->count()))));
         });
         $products = Product::all();
+        $products->each(function ($product) use ($coupons) {
+            $product->coupons()->attach($coupons->random(random_int(0, min(3, $coupons->count()))));
+        });
     }
 }

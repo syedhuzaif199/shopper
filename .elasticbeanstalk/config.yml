@@ -1,5 +1,6 @@
 branch-defaults:
   main:
-    environment: null
+    environment: Shopper-env-3
+    group_suffix: null
 global:
   profile: eb-cli

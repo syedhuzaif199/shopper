@@ -38,7 +38,7 @@
                         <td>
                             {{ $coupon->code }}
                         </td>
-                        <td>{{ $coupon->discount }}%</td>
+                        <td>{{ $coupon->value }}{{ $coupon->discount_type === "percentage" ? "%" : "" }}</td>
                         <td>
                             <div class="flex gap-4 justify-end m-8">
                                 <a href="{{ route('admin.coupons.show', $coupon->id) }}">

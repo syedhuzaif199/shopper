@@ -10,7 +10,12 @@ class Coupon extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('is_used', 'used_at');
+        return $this->belongsToMany(User::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 
     public function orders()
